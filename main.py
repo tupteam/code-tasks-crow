@@ -65,13 +65,14 @@ def get_tridiagonal_determinant(matrix: list[list[int]]) -> int:
     if order == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
 
-    det_prev2 = matrix[0][0]
-    det_prev1 = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    a = matrix[0][0]
+    b = matrix[1][0]
+    c = matrix[0][1]
+    
+    det_prev2 = a
+    det_prev1 = a * a - b * c
 
     for i in range(2, order):
-        a = matrix[i][i]
-        b = matrix[i][i - 1]
-        c = matrix[i - 1][i]
         det_current = a * det_prev1 - b * c * det_prev2
         det_prev2, det_prev1 = det_prev1, det_current
 
